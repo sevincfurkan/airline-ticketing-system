@@ -26,5 +26,7 @@ public class Rota {
     @JoinColumn
     @OneToMany(fetch = FetchType.LAZY)
     private List<Fly> flyList;
+    private String position;
+    private String destination;
 
 }
