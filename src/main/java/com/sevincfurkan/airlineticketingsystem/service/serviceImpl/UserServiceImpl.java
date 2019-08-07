@@ -1,25 +1,31 @@
 package com.sevincfurkan.airlineticketingsystem.service.serviceImpl;
 
+import com.sevincfurkan.airlineticketingsystem.dto.RegistrationRequest;
 import com.sevincfurkan.airlineticketingsystem.dto.UserDto;
 import com.sevincfurkan.airlineticketingsystem.entity.User;
 import com.sevincfurkan.airlineticketingsystem.repository.UserRepository;
 import com.sevincfurkan.airlineticketingsystem.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     @Override
     public UserDto save(UserDto userDto) {
@@ -81,5 +87,22 @@ public class UserServiceImpl implements UserService {
         }
         userId.setFirstName(userDto.getFirstName());
         return save(userId);
+    }
+
+
+    @Transactional
+    public Boolean register(RegistrationRequest registrationRequest) {
+        try {
+            User user = new User();
+            user.setMail(registrationRequest.getEmail());
+            user.setLastName(registrationRequest.getNameSurname());
+            user.setPassword(bCryptPasswordEncoder.encode(registrationRequest.getPassword()));
+            user.setUserName(registrationRequest.getUsername());
+            userRepository.save(user);
+            return Boolean.TRUE;
+        } catch (Exception e) {
+            log.error("REGISTRATION=>", e);
+            return Boolean.FALSE;
+        }
     }
 }
