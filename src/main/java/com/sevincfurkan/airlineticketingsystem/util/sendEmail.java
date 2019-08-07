@@ -1,5 +1,6 @@
 package com.sevincfurkan.airlineticketingsystem.util;
 
+import com.sevincfurkan.airlineticketingsystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -13,6 +14,8 @@ public class sendEmail {
 
     @Autowired
     private JavaMailSender javaMailSender;
+    @Autowired
+    private UserRepository userRepository;
 
     public void sendMail(){
         SimpleMailMessage msg = new SimpleMailMessage();
