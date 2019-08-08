@@ -20,4 +20,6 @@ public class RotaDto {
     private AirPortDto airPortName;
     @ApiModelProperty(value = "rota fly list")
     private List<FlyDto> flyList;
+    private String dLat;
+    private String dLong;
 }

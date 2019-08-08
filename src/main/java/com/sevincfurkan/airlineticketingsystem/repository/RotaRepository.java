@@ -10,4 +10,6 @@ public interface RotaRepository extends JpaRepository<Rota,Long> {
     Rota findById(long id);
     List<Rota> findAllByTakeOff(Date takaOff);
     List<Rota> findAllByArrival(Date arrival);
+    Rota findByDLat(String dLat);
+    Rota findByDLong(String dLong);
 }
