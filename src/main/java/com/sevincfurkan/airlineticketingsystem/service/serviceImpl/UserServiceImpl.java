@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
         try {
             User user = new User();
             user.setMail(registrationRequest.getEmail());
-            user.setLastName(registrationRequest.getNameSurname());
+            user.setLastName(registrationRequest.getFirstName());
             user.setPassword(bCryptPasswordEncoder.encode(registrationRequest.getPassword()));
             user.setUserName(registrationRequest.getUsername());
             userRepository.save(user);

@@ -14,4 +14,5 @@ public interface RotaService {
     RotaDto save(RotaDto rotaDto);
     Boolean delete(Long id);
     RotaDto update(Long id,RotaDto rotaDto);
+    double showDistance(RotaDto rotaDto);
 }

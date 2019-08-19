@@ -22,7 +22,7 @@ public class AirPlane {
     @ManyToOne(fetch = FetchType.LAZY)
     private AirPort airPortName;
     private int capacity;
-    @JoinColumn
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Ticket> ticketList;
 }

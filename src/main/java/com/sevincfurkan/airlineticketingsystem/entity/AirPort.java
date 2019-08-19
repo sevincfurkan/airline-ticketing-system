@@ -20,10 +20,10 @@ public class AirPort {
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
     private City cityName;
-    @JoinColumn
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<AirPlane> airPlaneList;
-    @JoinColumn
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<Rota> rotaList;
 }

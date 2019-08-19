@@ -40,4 +40,11 @@ public class RotaController {
     public RotaDto update(@PathVariable("id") Long id, @RequestBody RotaDto rotaDto) {
         return rotaServiceImpl.update(id, rotaDto);
     }
+
+    @ApiOperation(value = "UPDATE ROTA", response = RotaDto.class)
+    @PostMapping("/distance")
+    public Double update(@RequestBody RotaDto rotaDto) {
+        return rotaServiceImpl.showDistance(rotaDto);
+    }
+
 }

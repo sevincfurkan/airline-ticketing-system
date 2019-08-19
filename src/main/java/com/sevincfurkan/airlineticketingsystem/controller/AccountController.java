@@ -3,6 +3,7 @@ package com.sevincfurkan.airlineticketingsystem.controller;
 import com.sevincfurkan.airlineticketingsystem.dto.LoginRequest;
 import com.sevincfurkan.airlineticketingsystem.dto.RegistrationRequest;
 import com.sevincfurkan.airlineticketingsystem.dto.TokenResponse;
+import com.sevincfurkan.airlineticketingsystem.dto.UserDto;
 import com.sevincfurkan.airlineticketingsystem.entity.User;
 import com.sevincfurkan.airlineticketingsystem.repository.UserRepository;
 import com.sevincfurkan.airlineticketingsystem.security.JwtTokenUtil;
@@ -10,6 +11,7 @@ import com.sevincfurkan.airlineticketingsystem.service.serviceImpl.UserServiceIm
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +30,7 @@ public class AccountController {
     @Autowired
     private UserServiceImpl userService;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="/login",method = RequestMethod.POST)
     public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest request) throws AuthenticationException {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         final User user = userRepository.findByUserName(request.getUsername());
@@ -41,5 +43,14 @@ public class AccountController {
         Boolean response = userService.register(registrationRequest);
         return ResponseEntity.ok(response);
     }
+
+   /* @PostMapping
+    @ResponseBody
+    public ResponseEntity<TokenResponse> getToken(@RequestBody LoginRequest request) throws AuthenticationServiceException {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        User theUser = userService.findByUserName(request.getUsername());
+        String token = jwtTokenUtil.generateToken(theUser);
+        return ResponseEntity.ok(new TokenResponse(theUser.getUserName(), token));
+    }*/
 
 }

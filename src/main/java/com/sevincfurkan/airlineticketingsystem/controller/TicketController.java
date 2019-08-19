@@ -30,7 +30,7 @@ public class TicketController {
     }
 
     @ApiOperation(value = "DELETE TICKET", response = Boolean.class)
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public Boolean delete(@PathVariable("id") Long id) {
         return ticketServiceImpl.delete(id);
     }

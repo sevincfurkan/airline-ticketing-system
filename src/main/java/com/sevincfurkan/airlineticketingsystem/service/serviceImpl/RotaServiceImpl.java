@@ -5,6 +5,7 @@ import com.sevincfurkan.airlineticketingsystem.entity.AirPort;
 import com.sevincfurkan.airlineticketingsystem.entity.Rota;
 import com.sevincfurkan.airlineticketingsystem.repository.RotaRepository;
 import com.sevincfurkan.airlineticketingsystem.service.RotaService;
+import com.sevincfurkan.airlineticketingsystem.util.DistanceCalculation;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,12 @@ public class RotaServiceImpl implements RotaService {
     private final RotaRepository rotaRepository;
     private final ModelMapper modelMapper;
 
+    private DistanceCalculation distanceCalculation;
+
     public RotaServiceImpl(RotaRepository rotaRepository,ModelMapper modelMapper){
         this.rotaRepository=rotaRepository;
         this.modelMapper=modelMapper;
+        distanceCalculation = new DistanceCalculation();
     }
     @Override
     public RotaDto findById(Long id) {
@@ -47,6 +51,8 @@ public class RotaServiceImpl implements RotaService {
     public RotaDto save(RotaDto rotaDto) {
         Rota rota = modelMapper.map(rotaDto,Rota.class);
         rota=rotaRepository.save(rota);
+
+
         return modelMapper.map(rota,RotaDto.class);
     }
 
@@ -66,4 +72,8 @@ public class RotaServiceImpl implements RotaService {
     public RotaDto update(Long id, RotaDto rotaDto) {
         return null;
     }
+    @Override
+    public double showDistance(RotaDto rotaDto) {
+        return distanceCalculation.distance(38.304010,27.151399,41.008246,28.973984);
+}
 }

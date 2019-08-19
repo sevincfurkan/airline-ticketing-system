@@ -20,7 +20,7 @@ public class City {
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
     private Country countryName;
-    @JoinColumn
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<AirPort> airPortList;
 }

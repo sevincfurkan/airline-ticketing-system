@@ -17,7 +17,7 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
-    @JoinColumn
+
     @OneToMany(fetch = FetchType.EAGER)
     private List<Ticket> ticketList;
 }

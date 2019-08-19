@@ -23,7 +23,7 @@ public class Rota {
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
     private AirPort airPortName;
-    @JoinColumn
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<Fly> flyList;
     private String dLat;

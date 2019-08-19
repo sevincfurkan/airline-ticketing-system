@@ -17,7 +17,7 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String countryName;
-    @JoinColumn
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<City> cityList;
 }

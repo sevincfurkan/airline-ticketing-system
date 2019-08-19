@@ -25,7 +25,7 @@ public class User implements Serializable {
     private String mail;
     private String userName;
     private String password;
-    @JoinColumn
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<Role> roleList;
 }

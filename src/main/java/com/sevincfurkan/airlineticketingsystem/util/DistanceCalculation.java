@@ -1,13 +1,8 @@
 package com.sevincfurkan.airlineticketingsystem.util;
 
-import com.sevincfurkan.airlineticketingsystem.entity.Rota;
-import com.sevincfurkan.airlineticketingsystem.service.serviceImpl.RotaServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class DistanceCalculation {
-    @Autowired
-    private Rota rota=new Rota();
-    private double distance(double originLat, double originLong, double destinationLat, double destinationLong) {
+
+    public double distance(double originLat, double originLong, double destinationLat, double destinationLong) {
         double radius=6371;
         double dLat=deg2rad(destinationLat-originLat);
         double dLong=deg2rad( destinationLong-originLong);
